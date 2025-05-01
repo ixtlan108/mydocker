@@ -1,0 +1,53 @@
+#!/bin/bash
+
+RUBY_VER="rcs/ruby:2.6"
+NETWORK="pgutil_lofsrud"
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+OPTIONS:
+   -h      Show this message
+   -i      Start the irb 
+   -s      Name of Ruby script to run (effective when -i is off)
+   -n 	   Network name. Default: $NETWORK
+EOF
+}
+
+IRB=0
+SCRIPT=""
+while getopts “his:n:” OPTION
+do
+     case $OPTION in
+        h)
+            usage
+            exit 1
+            ;;
+        i)
+            IRB=1
+            ;;
+        s)
+            SCRIPT=$OPTARG
+            ;;
+        n)
+            NETWORK=$OPTARG
+            ;;
+        ?)
+            usage
+            exit
+            ;;
+     esac
+done
+
+if [[ $IRB -eq 1 ]]; then
+    docker run -it --rm --network $NETWORK -v "$PWD":/usr/src/myapp -w /usr/src/myapp $RUBY_VER /bin/bash
+else
+    docker run -it --rm --network $NETWORK -v "$PWD":/usr/src/myapp -w /usr/src/myapp $RUBY_VER ruby $SCRIPT
+fi 
+
+echo $RUBY_VER
+
+exit 0
+

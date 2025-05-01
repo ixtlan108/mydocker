@@ -1,6 +1,6 @@
-FROM postgres:11.1
+FROM postgres:17.2
 
-MAINTAINER Hamilton 
+MAINTAINER Hamilton
 
 # RUN apt update && apt -y install openssh-server
 

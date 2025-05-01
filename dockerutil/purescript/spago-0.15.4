@@ -2,6 +2,7 @@
 
 PURE_VER="rcs/purescript:0.15.4"
 
-docker run --rm -itv $PWD:/home/pureuser $PURE_VER spago "$@"
+# docker run --rm -itv $PWD:/home/pureuser $PURE_VER spago "$@"
+docker run --rm -itv $PWD:/home/pureuser $PURE_VER /bin/sh 
 
 exit 0

@@ -1,12 +1,10 @@
-FROM node:18.9.0
+FROM node:20.4
 
 MAINTAINER Hamilton 
 
-RUN npm install -g --unsafe-perm purescript@v0.15.4 spago esbuild
+RUN npm install -g --unsafe-perm purescript@v0.15.10 spago esbuild
 
 #ENV PURESCRIPT_DOWNLOAD_SHA1 766c6f2945ca92e9ea1a469fe150d964edb67875
-
-#RUN npm install -g pulp psc-package
 
 #RUN cd /opt \
 #    && wget https://github.com/purescript/purescript/releases/download/v0.13.8/linux64.tar.gz \

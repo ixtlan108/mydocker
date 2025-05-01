@@ -1,6 +1,8 @@
 #!/bin/bash
 
-PG_VER="rcs/postgres:11.1"
+# PG_VER="rcs/postgres:16.1"
+
+PG_VER="rcs/postgres:17.2"
 
 
 usage()
@@ -13,18 +15,18 @@ OPTIONS:
    -d      Database name. Default: (\$DATABASE_NAME.dmp)
    -r      Dump dir. Default: $PWD 
    -f      Dump file 
-   -c      Container name (default: postgres1)
-   -n      Network
+   -c      Container name (default: postgres17)
+   -n      Network (default: pgutil_lofsrud)
    -x      Gzip dump file. Default: false
 EOF
 }
 
 DATABASE_NAME=
 DUMP_FILE=
-CONTAINER_NAME="postgres1"
-DUMP_DIR=
+CONTAINER_NAME="postgres17"
+DUMP_DIR="/home/rcs/opt/database/database_dumps"
 GZIP="0"
-NETWORK="bridge"
+NETWORK="pgutil_lofsrud"
 
 while getopts "hd:r:f:c:n:x" OPTION
 do

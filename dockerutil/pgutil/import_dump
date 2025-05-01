@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PG_VER="rcs/postgres:11.1"
+PG_VER="rcs/postgres:17.2"
 
 
 usage()
@@ -13,14 +13,15 @@ OPTIONS:
    -d      Database name 
    -f      Dump file 
    -c      Container name (default: postgres1)
-   -n      Network
+   -n      Network (default: pgutil_lofsrud)
 EOF
 }
 
 DATABASE_NAME=
 DUMP_FILE=
-CONTAINER_NAME="postgres1"
-NETWORK="bridge"
+CONTAINER_NAME="postgres17"
+# NETWORK="bridge"
+NETWORK="pgutil_lofsrud"
 
 while getopts "hd:f:c:n:" OPTION
 do
@@ -61,7 +62,7 @@ fi
 
 echo "Importing dump file '$DUMP_FILE' to database '$DATABASE_NAME'... (container: $CONTAINER_NAME)"
 
-docker run --rm --interactive --network $NETWORK --link $CONTAINER_NAME:postgres --volume $PWD/:/tmp/ $PG_VER \
+sudo docker run --rm --interactive --network $NETWORK --link $CONTAINER_NAME:postgres --volume $PWD/:/tmp/ $PG_VER \
     bash -c "export PGPASSWORD='ok'; exec psql -h postgres -p 5432 -U postgres -d $DATABASE_NAME < /tmp/$DUMP_FILE"
 
 

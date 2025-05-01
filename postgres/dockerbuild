@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t rcs/postgres:11.1 . 
+docker build -t rcs/postgres:17.2 .
 
 exit 0

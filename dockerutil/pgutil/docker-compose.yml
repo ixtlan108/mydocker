@@ -1,42 +1,73 @@
 ---
-version: '3'
+version: "3"
 services:
-    pg:
-        image: rcs/postgres:11.1
-        container_name: postgres1
-        networks:
-            lofsrud:
-                ipv4_address: 172.20.1.3
-        ports:
-            - 5432:5432
-        volumes:
-            - /home/rcs/database/dockervolumes/postgres/data:/var/lib/postgresql/data
-        environment:
-            POSTGRES_PASSWORD: ok
-        #depends_on: 
-        #    - redis
-    redis:
-        image: redis:6.0.1-alpine
-        container_name: redis1
-        networks:
-            lofsrud:
-                ipv4_address: 172.20.1.2
-    rabbitmq:
-        image: rabbitmq:3.8.9-management-alpine
-        container_name: rabbitmq1
-        hostname: rabbit_node_1
-        networks:
-            lofsrud:
-                ipv4_address: 172.20.1.4
-        # ports:
-        #    - 15672:15672
-        environment:
-            RABBITMQ_DEFAULT_VHOST: etradejanitor_vhost
-            RABBITMQ_DEFAULT_USER: etradejanitor
-            RABBITMQ_DEFAULT_PASS: VhCHeUJ40
-        # http://172.20.1.4:15672
+  # pg:
+  #     image: rcs/postgres:11.1
+  #     container_name: postgres1
+  #     networks:
+  #         lofsrud:
+  #             ipv4_address: 172.20.1.3
+  #     ports:
+  #         - 5432:5432
+  #     volumes:
+  #         - /home/rcs/database/dockervolumes/postgres/data:/var/lib/postgresql/data
+  #     environment:
+  #         POSTGRES_PASSWORD: ok
+  redis:
+    image: redis:7.4.1-alpine
+    container_name: redis1
+    networks:
+      lofsrud:
+        ipv4_address: 172.20.1.2
+  pg16:
+    image: rcs/postgres:17.2
+    container_name: postgres17
+    networks:
+      lofsrud:
+        ipv4_address: 172.20.1.6
+    volumes:
+      - /home/rcs/database/dockervolumes/postgres/data17:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ok
+  pg17_atest:
+    image: rcs/postgres:17.2
+    container_name: postgres17_atest
+    networks:
+      lofsrud:
+        ipv4_address: 172.20.1.7
+    volumes:
+      - /home/rcs/database/dockervolumes/postgres/data17_atest:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ok
+  # rabbitmq:
+  #     image: rabbitmq:3.8.9-management-alpine
+  #     container_name: rabbitmq1
+  #     hostname: rabbit_node_1
+  #     networks:
+  #         lofsrud:
+  #             ipv4_address: 172.20.1.4
+  #     # ports:
+  #     #    - 15672:15672
+  #     environment:
+  #         RABBITMQ_DEFAULT_VHOST: etradejanitor_vhost
+  #         RABBITMQ_DEFAULT_USER: etradejanitor
+  #         RABBITMQ_DEFAULT_PASS: VhCHeUJ40
+  # nordnet:
+  #     image: rcs/nordnetservice:1.0.0
+  #     container_name: nordnetservice1
+  #     entrypoint: java -jar /app/nordnetservice-1.0.0.jar
+  #     networks:
+  #         lofsrud:
+  #             ipv4_address: 172.20.1.5
+  #     #ports:
+  #     #   - 8082:8082
+  #     # environment:
+  #     #    # PROFILE: demo
+  #     #    - prod
+  #     #volumes:
+  #     #    - /home/rcs/opt/java/nordnet-service:/home/rcs/opt/java/nordnet-service
 networks:
-    lofsrud:
-        ipam:
-            config:
-                - subnet: 172.20.0.0/16
+  lofsrud:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
