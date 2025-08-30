@@ -39,6 +39,7 @@ services:
     volumes:
       - /home/rcs/database/dockervolumes/postgres/data17_atest:/var/lib/postgresql/data
       - /home/rcs/database/database_dumps:/home/rcs/database/database_dumps
+      - /home/rcs/opt/klaxton/PWSQLDB/database:/home/rcs/klaxton
     environment:
       POSTGRES_PASSWORD: ok
   # rabbitmq:
