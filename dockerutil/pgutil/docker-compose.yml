@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   # pg:
   #     image: rcs/postgres:11.1
@@ -28,20 +27,22 @@ services:
     volumes:
       - /home/rcs/database/dockervolumes/postgres/data17:/var/lib/postgresql/data
       - /home/rcs/database/database_dumps:/home/rcs/database/database_dumps
-    environment:
-      POSTGRES_PASSWORD: ok
-  pg17_atest:
-    image: rcs/postgres:17.2
-    container_name: postgres17_atest
-    networks:
-      lofsrud:
-        ipv4_address: 172.20.1.7
-    volumes:
-      - /home/rcs/database/dockervolumes/postgres/data17_atest:/var/lib/postgresql/data
-      - /home/rcs/database/database_dumps:/home/rcs/database/database_dumps
       - /home/rcs/opt/klaxton/PWSQLDB/database:/home/rcs/klaxton
+      - /home/rcs/opt/etradejanitor2/database:/home/rcs/etradejanitor2
     environment:
       POSTGRES_PASSWORD: ok
+  # pg17_atest:
+  #   image: rcs/postgres:17.2
+  #   container_name: postgres17_atest
+  #   networks:
+  #     lofsrud:
+  #       ipv4_address: 172.20.1.7
+  #   volumes:
+  #     - /home/rcs/database/dockervolumes/postgres/data17_atest:/var/lib/postgresql/data
+  #     - /home/rcs/database/database_dumps:/home/rcs/database/database_dumps
+  #     - /home/rcs/opt/klaxton/PWSQLDB/database:/home/rcs/klaxton
+  #   environment:
+  #     POSTGRES_PASSWORD: ok
   # rabbitmq:
   #     image: rabbitmq:3.8.9-management-alpine
   #     container_name: rabbitmq1
